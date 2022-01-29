@@ -114,3 +114,31 @@ def draw_fields(window):
 
 def draw_player(window, player, box):  # drawing player
     player = pygame.draw.circle(box, player.color, 10, 100)
+
+def draw_buy_menu(card,window,x,y,click,player):
+    menu_background = pygame.Rect(195, 45, 1005, 855)
+    pygame.draw.rect(window, (0, 0, 0), menu_background)
+    menu = pygame.Rect(200, 50, 995, 845)
+    pygame.draw.rect(window, (60, 60, 60), menu)
+    draw_text("Czy chcesz kupic karte?", pygame.font.SysFont(None, 70),(255, 255, 255), window, menu.left + 200, menu.topleft[1]+40 )
+    window.blit(card.image,(470, 175));
+    yes = pygame.Rect(menu.left + 25, 500, 100, 50)
+    pygame.draw.rect(window, (40, 40, 40), yes)
+    if yes.collidepoint((x, y)):
+        pygame.draw.rect(window, (20, 20, 20), yes)
+        #//self.x = 650
+        #self.y = 620
+        #self.show_player(window, (255, 0, 0))
+        if click is True:
+            click = False
+            player.cash -= card.cost
+            player.cards +=1
+            player.street.append(card)
+            card.bought = True
+            return 0
+    no = pygame.Rect(menu.right - 175, 500, 100, 50)
+    pygame.draw.rect(window, (40, 40, 40), no)
+    if no.collidepoint((x, y)):
+        pygame.draw.rect(window, (20, 20, 20), no)
+        if click is True:
+            return 0

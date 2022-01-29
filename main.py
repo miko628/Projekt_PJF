@@ -12,7 +12,10 @@ import draw
 from constants import *
 
 # import constants
-
+p1 = players.Player(1500)
+p2 = players.Player(1500)
+p3 = players.Player(1500)
+p4 = players.Player(1500)
 pygame.init()
 # crate screen
 window = pygame.display.set_mode((width, height))
@@ -22,53 +25,241 @@ background = pygame.transform.scale(background, (1800, 1000))
 board = pygame.transform.scale(board, (910, 910))
 board = pygame.transform.rotate(board, -90)
 font = pygame.font.SysFont('corbel', 30)
-def street_fill():
-    streetlist=[]
-    streetlist.append(card.card(0,60,streetimagelist[0],30))
-    streetlist.append(card.card(1, 60, streetimagelist[1], 30))
-    streetlist.append(card.card(2, 200, streetimagelist[2], 100))
-    streetlist.append(card.card(3, 100, streetimagelist[3], 50))
-    streetlist.append(card.card(4, 100, streetimagelist[4], 50))
-    streetlist.append(card.card(5, 120, streetimagelist[5], 60))
-    streetlist.append(card.card(6, 140, streetimagelist[6], 70))
-    streetlist.append(card.card(7, 150, streetimagelist[7], 70))
-    streetlist.append(card.card(8, 140, streetimagelist[8], 30))
-    streetlist.append(card.card(9, 160, streetimagelist[9], 80))
-    streetlist.append(card.card(10, 200, streetimagelist[10], 100))
-    streetlist.append(card.card(11, 180, streetimagelist[11], 90))
-    streetlist.append(card.card(12, 180, streetimagelist[12], 90))
-    streetlist.append(card.card(13, 200, streetimagelist[13], 100))
-    streetlist.append(card.card(14, 220, streetimagelist[14], 110))
-    streetlist.append(card.card(15, 220, streetimagelist[15], 110))
-    streetlist.append(card.card(16, 240, streetimagelist[16], 120))
-    streetlist.append(card.card(17, 200, streetimagelist[17], 100))
-    streetlist.append(card.card(18, 260, streetimagelist[18], 130))
-    streetlist.append(card.card(19, 260, streetimagelist[19], 130))
-    streetlist.append(card.card(20, 150, streetimagelist[20], 75))
-    streetlist.append(card.card(21, 280, streetimagelist[21], 140))
-    streetlist.append(card.card(22, 300, streetimagelist[22], 150))
-    streetlist.append(card.card(23, 300, streetimagelist[23], 150))
-    streetlist.append(card.card(24, 320, streetimagelist[24], 160))
-    streetlist.append(card.card(25, 200, streetimagelist[25], 100))
-    streetlist.append(card.card(26, 350, streetimagelist[26], 175))
-    streetlist.append(card.card(27, 400, streetimagelist[27], 200))
 
 
+def chance(chancelist):
+    x = 0
+    return x
+
+
+def community_chest(communitylist):
+    x = 0
+    return x
+
+def field_check(player):
+    end = 0
+    if player.field == 0:
+        # start
+        end = 0
+    if player.field == 1:
+        # konopacka
+        if cardlist[0].bought == False and cardlist[0].cost<player.cash:
+            card_loop(player, cardlist[0])
+            end = 1
+    if player.field == 2:
+        # kasa spoleczna
+        community_chest(communitylist)
+    if player.field == 3:
+        # stalowa
+        if cardlist[1].bought == False and cardlist[1].cost<player.cash:
+            card_loop(player, cardlist[1])
+            end = 1
+    if player.field == 4:
+        # podatek dochodowy
+        player.cash -= 200
+    if player.field == 5:
+        # dworzec zachodni
+        if cardlist[2].bought == False and cardlist[2].cost<player.cash:
+            card_loop(player, cardlist[2])
+            end = 1
+    if player.field == 6:
+        # radzyminska
+        if cardlist[3].bought == False and cardlist[3].cost<player.cash:
+            card_loop(player, cardlist[3])
+            end = 1
+    if player.field == 7:
+        # Szansa
+        chance(chancelist)
+    if player.field == 8:
+        # jagiellonska
+        if cardlist[4].bought == False and cardlist[4].cost<player.cash:
+            card_loop(player, cardlist[4])
+            end = 1
+    if player.field == 9:
+        # targowa
+        if cardlist[5].bought == False and cardlist[5].cost<player.cash:
+            card_loop(player, cardlist[5])
+            end = 1
+    if player.field == 10:
+        # odwiedzanie
+        end = 0
+    if player.field == 11:
+        # plowiecka
+        if cardlist[6].bought == False and cardlist[6].cost<player.cash:
+            card_loop(player, cardlist[6])
+            end = 1
+    if player.field == 12:
+        # elektrownia
+        if cardlist[7].bought == False and cardlist[7].cost<player.cash:
+            card_loop(player, cardlist[7])
+            end = 1
+    if player.field == 13:
+        # marsa
+        if cardlist[8].bought == False and cardlist[8].cost<player.cash:
+            card_loop(player, cardlist[8])
+            end = 1
+    if player.field == 14:
+        # grochowska
+        if cardlist[9].bought == False and cardlist[9].cost<player.cash:
+            card_loop(player, cardlist[9])
+            end = 1
+    if player.field == 15:
+        # dworzec gdanski
+        if cardlist[10].bought == False and cardlist[10].cost<player.cash:
+            card_loop(player, cardlist[10])
+            end = 1
+    if player.field == 16:
+        # obozowa
+        if cardlist[11].bought == False and cardlist[11].cost<player.cash:
+            card_loop(player, cardlist[11])
+            end = 1
+    if player.field == 17:
+        # kasa spoleczna
+        community_chest(communitylist)
+    if player.field == 18:
+        # gorczewska
+        if cardlist[12].bought == False and cardlist[12].cost<player.cash:
+            card_loop(player, cardlist[12])
+            end = 1
+    if player.field == 19:
+        # wolska
+        if cardlist[13].bought == False and cardlist[13].cost<player.cash:
+            card_loop(player, cardlist[13])
+            end = 1
+    if player.field == 20:
+        # parking
+        end = 0
+    if player.field == 21:
+        # mickiewicza
+        if cardlist[14].bought == False and cardlist[14].cost<player.cash:
+            card_loop(player, cardlist[14])
+            end = 1
+    if player.field == 22:
+        # Szansa
+        chance(chancelist)
+    if player.field == 23:
+        # slowackiego
+        if cardlist[15].bought == False and cardlist[15].cost<player.cash:
+            card_loop(player, cardlist[15])
+            end = 1
+    if player.field == 24:
+        # plac wilsona
+        if cardlist[16].bought == False and cardlist[16].cost<player.cash:
+            card_loop(player, cardlist[16])
+            end = 1
+    if player.field == 25:
+        # dworzec wschodni
+        if cardlist[17].bought == False and cardlist[17].cost<player.cash:
+            card_loop(player, cardlist[17])
+            end = 1
+    if player.field == 26:
+        # swietokrzyska
+        if cardlist[18].bought == False and cardlist[18].cost<player.cash:
+            card_loop(player, cardlist[18])
+            end = 1
+    if player.field == 27:
+        # krakowskie przedmiescie
+        if cardlist[19].bought == False and cardlist[19].cost<player.cash:
+            card_loop(player, cardlist[19])
+            end = 1
+    if player.field == 28:
+        # wodociagi
+        if cardlist[20].bought == False and cardlist[20].cost<player.cash:
+            card_loop(player, cardlist[20])
+            end = 1
+    if player.field == 29:
+        # nowy swiat
+        if cardlist[21].bought == False and cardlist[21].cost<player.cash:
+            card_loop(player, cardlist[21])
+            end = 1
+    if player.field == 30:
+        # idz do wiezienia
+        player.field = 10
+    if player.field == 31:
+        # plac trzech krzyzy
+        if cardlist[22].bought == False and cardlist[22].cost<player.cash:
+            card_loop(player, cardlist[22])
+            end = 1
+    if player.field == 32:
+        # marszalkowska
+        if cardlist[23].bought == False and cardlist[23].cost<player.cash:
+            card_loop(player, cardlist[23])
+            end = 1
+    if player.field == 33:
+        # kasa spoleczna
+        community_chest(communitylist)
+    if player.field == 34:
+        # aleje jerozolimskie
+        if cardlist[24].bought == False and cardlist[24].cost<player.cash:
+            card_loop(player, cardlist[24])
+            end = 1
+    if player.field == 35:
+        # dworzec centralny
+        if cardlist[25].bought == False and cardlist[25].cost<player.cash:
+            card_loop(player, cardlist[25])
+            end = 1
+    if player.field == 36:
+        # Szansa
+        chance(chancelist)
+    if player.field == 37:
+        # belwederska
+        if cardlist[26].bought == False and cardlist[26].cost<player.cash:
+            card_loop(player, cardlist[26])
+            end = 1
+    if player.field == 38:
+        # domiar podatkowy
+        player.cash -= 100
+    if player.field == 39:
+        # aleje ujazdowskie
+        if cardlist[27].bought == False and cardlist[27].cost<player.cash:
+            card_loop(player, cardlist[27])
+            end = 1
+    return end    #    card.card_buy(cardlist[26], player)
+
+
+
+def card_loop(player, card):
+
+    g4 = game.Game(False, True)
+    #card.image=pygame.transform.scale(card.image, (559.166666667, 361.666666667))
+    while g4.start:
+        g4.clock.tick(60)
+        g4.click = False
+        g4.x, g4.y = pygame.mouse.get_pos()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                g4.start = False
+                quit()
+            # keys_pressed = pygame.key.get_pressed()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    if g4.pause is True:
+                        g4.pause = False
+                        draw.show_board(window, board)
+                    else:
+                        # click = False
+                        g4.pause = True
+                        draw.show_window(window, background)
+                        draw.draw_text("PAUZA", pygame.font.SysFont(None, 170), (0, 0, 0), window, 675, 375)
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    g4.click = True
+            if g4.pause is False:
+                if draw.draw_buy_menu(card,window,g4.x,g4.y,g4.click,player) == 0:
+                    game_loop()
+                    pygame.quit()
+        pygame.display.update()
+    pygame.quit()
 def color_loop():
-    g3 = game.Game(False,True)
-    g3.clock=pygame.time.Clock()
-    p1 = players.Player(1500)
-    p2 = players.Player(1500)
-    p3 = players.Player(1500)
-    p4 = players.Player(1500)
+    g3 = game.Game(False, True)
     draw.show_board(window, board)
     fieldsList = []
     fieldsList.extend(draw.draw_fields(window))
     ColorList = [(255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 0)]
     while g3.start:
         g3.clock.tick(60)
-        g3.click=False
-        g3.x,g3.y=pygame.mouse.get_pos()
+        g3.click = False
+        g3.x, g3.y = pygame.mouse.get_pos()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 g3.start = False
@@ -100,27 +291,27 @@ def color_loop():
                     ColorList.remove(p3.color)
                     p4.color = random.choice(ColorList)
                     del ColorList
-                    game_loop(p1,p2,p3,p4)
+                    game_loop()
                     return
 
         pygame.display.update()
 
-def game_loop(p1,p2,p3,p4):
+
+def game_loop():
     g2 = game.Game(False, True)
-    g2.clock = pygame.time.Clock()
     # play = True
-    #ColorList=[(255, 0, 0),(0, 255, 0), (0, 0, 255),(255, 255, 0)]
-    playerList=[]
+    # ColorList=[(255, 0, 0),(0, 255, 0), (0, 0, 255),(255, 255, 0)]
+    playerList = []
     playerList.append(p1)
     playerList.append(p2)
     playerList.append(p3)
     playerList.append(p4)
-
-    cash_window,button_dice = draw.draw_content(p1, window)
-    fieldsList=[]
+    g2.x, g2.y = 0,0
+    cash_window, button_dice = draw.draw_content(p1, window)
+    fieldsList = [] # lista pol
+    fieldsList.extend(draw.draw_fields(window))
     draw.show_board(window, board)
     draw.draw_content(p1, window)
-    fieldsList.extend(draw.draw_fields(window))
     p1.draw_players(window, fieldsList[p1.field], 1)
     p2.draw_players(window, fieldsList[p2.field], 2)
     p3.draw_players(window, fieldsList[p3.field], 3)
@@ -149,28 +340,36 @@ def game_loop(p1,p2,p3,p4):
             if event2.type == pygame.MOUSEBUTTONDOWN:
                 if event2.button == 1:
                     g2.click = True
-            #button_menu = draw.draw_button(window, (0, 0, 0), (255, 255, 255), 800, 400, 200, 60, "Graj", 60)
+            # button_menu = draw.draw_button(window, (0, 0, 0), (255, 255, 255), 800, 400, 200, 60, "Graj", 60)
             # pygame.draw.rect(window, (0, 0, 0), button_menu)
             # draw.draw_text("Graj", font, (255, 255, 255), window, button_menu.left + 60, button_menu.center[1] - 10)
             if g2.pause is False:
                 if button_dice.collidepoint((g2.x, g2.y)):
                     pygame.draw.rect(window, (30, 30, 30), button_dice)
-                    draw.draw_text(("Rzuć kostką"), pygame.font.SysFont(None, 30), (255, 255, 255), window, button_dice.left + 5, button_dice.center[1] - 10)
+                    draw.draw_text(("Rzuć kostką"), pygame.font.SysFont(None, 30), (255, 255, 255), window,
+                                   button_dice.left + 5, button_dice.center[1] - 10)
                     if g2.click is True:
                         p1.throw_dice()
                         draw.show_board(window, board)
                         draw.draw_content(p1, window)
-                        p1.draw_players(window, fieldsList[p1.field],1)
+                        p1.draw_players(window, fieldsList[p1.field], 1)
+                        p2.draw_players(window, fieldsList[p2.field], 2)
+                        p3.draw_players(window, fieldsList[p3.field], 3)
+                        p4.draw_players(window, fieldsList[p4.field], 4)
+                        if field_check(p1) == 1:
+                            pygame.quit()
+                        p1.draw_players(window, fieldsList[p1.field], 1)
                         p2.draw_players(window, fieldsList[p2.field], 2)
                         p3.draw_players(window, fieldsList[p3.field], 3)
                         p4.draw_players(window, fieldsList[p4.field], 4)
                 else:
                     pygame.draw.rect(window, (50, 50, 50), button_dice)
-                    draw.draw_text(("Rzuć kostką"), pygame.font.SysFont(None, 30), (255, 255, 255), window, button_dice.left + 5,
-                    button_dice.center[1] - 10)
-        #pygame.display.update()
+                    draw.draw_text(("Rzuć kostką"), pygame.font.SysFont(None, 30), (255, 255, 255), window,
+                                   button_dice.left + 5,
+                                   button_dice.center[1] - 10)
+        # pygame.display.update()
 
-           # p1.show_player(window, p1.color)
+        # p1.show_player(window, p1.color)
         pygame.display.update()
         # pygame.display.flip()
 
@@ -211,7 +410,7 @@ def menu_loop():
                 # g1.pause = True
                 # show_board()
                 color_loop()
-                return
+                pygame.quit()
                 # time.sleep(1)
         button_exit = draw.draw_button(window, (0, 0, 0), (255, 255, 255), 800, 500, 200, 60, "Wyjście", 60)
         # pygame.draw.rect(window, (0, 0, 0), button_exit)

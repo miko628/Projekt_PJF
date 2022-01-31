@@ -1,8 +1,8 @@
 #  Copyright (c) 2022.
 #  Programowanie w językach funkcyjnych WCY19IJ3S1 Michał Kutryj
-from constants import *
+#from constants import *
 import random
-from datetime import datetime
+#from datetime import datetime
 from main import p1, p2, p3, p4
 
 
@@ -379,6 +379,7 @@ def community_chest(player, x):
             return 0, player.number, 3
     if x == 4:
         # zaplac grzywne 10 ziko albo szansa
+        player.cash-=10
         return 1, player.number, 4
     if x == 5:
         # sprzedales obligacje pobierz 100
@@ -426,9 +427,6 @@ def community_chest(player, x):
         player.prisoncard = True
         return 0, player.number, 15
 
-
-def prison(player):
-    return
 
 
 def random1(seed):

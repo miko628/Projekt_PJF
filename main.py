@@ -333,6 +333,7 @@ def game_loop():
                     if b1 == 0:
                         if draw.draw_specialmenu(window,g2.click,g2.x,g2.y,chancelist[b3].image,p1) == 0:
                             n1 =4
+                            b1 = None
                             draw.show_board(window, board)
                             p1.draw_players(window, fieldsList[p1.field], p1.number)
                             p2.draw_players(window, fieldsList[p2.field], p2.number)
@@ -344,6 +345,7 @@ def game_loop():
                         # zaplata za domy
                         if draw.draw_specialmenu(window,g2.click,g2.x,g2.y,chancelist[b3].image,p1) == 0:
                             n1=4
+                            b1 = None
                             draw.show_board(window, board)
                             p1.draw_players(window, fieldsList[p1.field], p1.number)
                             p2.draw_players(window, fieldsList[p2.field], p2.number)

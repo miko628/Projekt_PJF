@@ -4,7 +4,7 @@
 import pygame
 import draw
 import random
-import constants
+#import constants
 
 
 class Player:
@@ -70,9 +70,6 @@ class Player:
                 # draw.show_board(window, board)
         return self.color
 
-    def calc_position(self):
-        self.x = 1100
-        self.y = 900
 
     def show_player(self, window, color):
         # self.calc_position()

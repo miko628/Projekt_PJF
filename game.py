@@ -9,4 +9,5 @@ class Game:
         self.start = start
         self.x, self.y = 0, 0
         self.pause = pause
+        self.back = False
         self.clock = pygame.time.Clock()

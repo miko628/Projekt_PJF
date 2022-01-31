@@ -4,10 +4,12 @@
 import pygame
 import draw
 import random
+import constants
 
 
 class Player:
-    def __init__(self, cash):
+    def __init__(self,number, cash):
+        self.number = number
         self.color = 0
         self.x = 0
         self.y = 0
@@ -15,6 +17,8 @@ class Player:
         self.field = 0
         self.street = []
         self.cards = 0
+        self.prison = False
+        self.prisoncard = False
 
     def color_choose(self, x, y, click, window):
         button_outline = pygame.Rect(595, 395, 410, 310)
@@ -74,23 +78,39 @@ class Player:
         # self.calc_position()
         pygame.draw.circle(window, color, (self.x, self.y), 20)
 
-    def throw_dice(self):
+    def throw_dice(self, window):
         dice1 = random.randint(1, 6)
         dice2 = random.randint(1, 6)
-        # animacja kostek ? XD
-        # self.field = (self.field+1)%40
-        self.field = (self.field + dice1 + dice2) % 40
+        if self.prison == False:
+            button_dice = pygame.Rect(1050, 170, 150, 70)
+            pygame.draw.rect(window, (50, 50, 50), button_dice)
+            draw.draw_text(("Wynik: "+str(dice1)+" "+str(dice2)), pygame.font.SysFont(None, 30), (255, 255, 255), window, button_dice.left + 5,
+                  button_dice.center[1] - 10)
+            if self.field > 0 and (self.field + dice1 + dice2) % 40 <self.field:
+                self.cash+=200
+            self.field = (self.field + dice1 + dice2) % 40
+            #self.field += 1
+        else:
+            button_dice = pygame.Rect(1050, 170, 150, 70)
+            pygame.draw.rect(window, (50, 50, 50), button_dice)
+            draw.draw_text(("Wynik: " + str(dice1) + " " + str(dice2)), pygame.font.SysFont(None, 30), (255, 255, 255),
+                           window, button_dice.left + 5,
+                           button_dice.center[1] - 10)
+            if dice1 == dice2:
+                self.prison=False
+        #self.field=2
 
     def draw_players(self, window, List, n):
         # List[self.field]
-        if n == 1 or n == 2:
+        if n == 0 or n == 1:
             n2 = 1
         else:
             n2 = 2
         n1 = n % 2 + 1
-        pygame.draw.circle(window, self.color, (List.left + 30 * n1, List.top + 50 * n2), 12)
+        pygame.draw.circle(window, self.color, (List.left+10 +23 * n1, List.top + 50 * n2), 10)
 
-    def card_show(self):
+    def card_show(self, window):
+        n=30
+
         for a in self.street:
-            return
-
+            window.blit(a.image, (50+n, 50))
